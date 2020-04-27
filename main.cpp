@@ -1,4 +1,6 @@
 #include <iostream>
+#include "board.hpp"
+#include "rules.hpp"
 
 int main()
 {
