@@ -10,7 +10,7 @@ public:
     int l, c; //coordinate
 };
 
-
+//elPsyKongroo
 class Board
 {
     int size;
