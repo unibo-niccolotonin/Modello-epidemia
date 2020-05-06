@@ -99,6 +99,7 @@ auto evolve(Board const& board)
             }
 
             //movement
+            //NOTA: occorre dare la possibilità di scegliere quale utilizzare
             if (current_cell.status != status::Non_existant)
             {
                 int failure_counter = 0;
