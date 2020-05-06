@@ -59,12 +59,14 @@ void healing(Person& person)
 auto evolve(Board const& board)
 {
     Board new_board = board;
-    //infection
+    
     for (int column = 0; row < board.size_(); row++)
     {
         for (int row = 0; column < board.size_(); column++)
         {
             Cell current_cell = board(column, row); 
+
+            //infection
             if (current_cell.status == status::Infected)
             {
                 //Infect other cells
@@ -86,7 +88,7 @@ auto evolve(Board const& board)
                 }
 
                 // Clock progression
-                if (new_board(column, row).clock < infection_constants::infection_time)
+                if (new_board(column, row).clock < infection_constants::infection_time) //Change time to a variable
                 {
                     new_board(column, row).clock++;
                 } 
@@ -95,6 +97,35 @@ auto evolve(Board const& board)
                     new_board(column, row).status = status::Immune; 
                 }
             }
+
+            //movement
+            if (current_cell.status != status::Non_existant)
+            {
+                int failure_counter = 0;
+                while (failure_counter != 8)
+                {
+                std::random_device a;
+                std::random_device b;
+                std::uniform_real_distribution<int> distribution(0,1); //La distribuzione potrebbe essere cambiata
+                new_board(column, row).vx = distribution(a);
+                new_board(column, row).vy = distribution(b);
+
+                //for readability
+                int vx = &new_board(column, row).vx;
+                int vy = &new_board(column, row).vy;
+                
+                if (new_board(column + vy, row + vx).status == status::Non_existant)
+                {
+                    new_board(column + vy, row + vx) = new_board(column, row);
+                    new_board(column, row) = Cell(); // Assicurarsi che funzioni questa riassegnazione
+
+                    break;
+                }
+                failure_counter++;
+
+                }
+            }
+
         }
     }
 
