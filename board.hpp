@@ -1,46 +1,39 @@
 // Type your code here, or load an example.
 #include <vector>
 #include<iostream>
+enum state { alive, dead, immune, non_existant, infected };
 class Cell
 {
     int n;
 public:
-    enum state { alive, dead, immune, non_existant };
     int Vx, Vy;
-    int l, c; //coordinate
+    state status;
+    Cell(state stato) : status{ stato } {}
 };
 
-//elPsyKongroo
+
 class Board
 {
     int size;
     std::vector<std::vector<Cell>> board_;
 public:
-    Board(int n) : size{ n }, board_(n, std::vector<Cell>(n, state::non_existant)) {}
+
+    Board(int n) : size{ n }, board_(n, std::vector<Cell>(n, Cell(non_existant))) {}
     int size_() const { return size; }
-    state insertCell(int r, int c);
+    bool insertCell(int r, int c);
 };
 
-state Board::insertCell(int r, int c)
+bool Board::insertCell(int r, int c)
 {
     if (r < size && c < size)
     {
-        if (state::non_existant)
+        if (board_[r][c].status == non_existant)
         {
-            return state::alive;
+            board_[r][c].status == alive;
+            return true;
         }
-        if (state::dead)
-        {
-            return state::alive;
-        }
-        if (state::alive)
-        {
-            state::non_existant;
-        }
-    }
-    else
-    {
-        return state::non_existant;
+        else
+            return false;
     }
 }
 int main()
