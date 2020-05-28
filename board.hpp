@@ -19,7 +19,7 @@ public:
 class Board
 {
     int size;
-    std::vector<std::vector<Cell>> board_;
+    std::vector<std::vector< Cell >> board_;
 public:
 
     Board(int n) : size(n), board_(n, std::vector<Cell>(n, Cell(state::non_existant))) {};
@@ -39,20 +39,6 @@ public:
     }
 
 };
-
-bool Board::insertCell(int r, int c)
-{
-    if (r >= 0 && c >= 0 && r < size && c < size)
-    {
-        if (board_[r][c].status == state::non_existant)
-        {
-            board_[r][c].status = state::susceptible;
-            return true;
-        }
-        else
-            return false;
-    }
-}
 
 bool Board::insertCell(int r, int c)
 {
