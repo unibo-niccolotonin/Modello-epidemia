@@ -1,6 +1,7 @@
-// Type your code here, or load an example.
+#pragma once
 #include <vector>
 #include<iostream>
+#include <cassert>
 enum state { susceptible, dead, immune, non_existant, infected };
 class Cell
 {
