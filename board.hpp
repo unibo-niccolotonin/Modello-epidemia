@@ -26,12 +26,12 @@ public:
 
     Cell& operator()(int x, int y)
     {
-        return board[x][y];
+        return board_[x][y];
     }
 
     Cell operator()(int x, int y) const
     {
-        return Board[x][y];
+        return board_[x][y];
     }
 
 };
