@@ -26,13 +26,13 @@ public:
 
     Cell& operator()(int x, int y)
     {
-        assert(x >= 0 && x < size&& y >= 0 && y < size);
+        assert(x >= 0 && x < size&& y >= 0 && y < size, "out of bounds");
         return board_[x][y];
     }
 
     Cell operator()(int x, int y) const
     {
-        assert(x >= 0 && x < size&& y >= 0 && y < size);
+        assert(x >= 0 && x < size&& y >= 0 && y < size, "out of bounds");
         return board_[x][y];
     }
 
