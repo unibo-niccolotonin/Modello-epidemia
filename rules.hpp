@@ -10,7 +10,7 @@ namespace infection_constants
     int const infection_time = 30;
 }
 
-auto evolve(Board const& board)
+Board evolve(Board const& board)
 {
     Board new_board = board;
     
@@ -81,7 +81,7 @@ auto evolve(Board const& board)
                     vx = -vx;
 
                 if (column + vy > new_board.get_size() || column + vy < 0 )
-                    vy -vy;
+                    vy = -vy;
 
                 if (new_board(row + vx, column + vy).status == state::non_existant)
                 {
