@@ -7,6 +7,7 @@ class Cell
     int n;
 public:
     int Vx, Vy;
+    int clock = 0;
     state status;
     Cell(state stato) : status{ stato } {};
 };
