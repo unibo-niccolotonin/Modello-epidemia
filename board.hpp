@@ -19,7 +19,7 @@ public:
 class Board
 {
     int size;
-    std::vector<std::vector< Cell >> board_;
+    std::vector<std::vector<Cell> > board_;
 public:
 
     Board(int n) : size(n), board_(n, std::vector<Cell>(n, Cell(state::non_existant))) {};
