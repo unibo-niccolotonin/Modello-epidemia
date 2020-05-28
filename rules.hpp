@@ -5,18 +5,18 @@
 
 namespace infection_constants
 {
-    const int radius = 1;
-    const double infection_probability = 0.1;
-    const int infection_time = 30;
+    int const radius = 1;
+    double const infection_probability = 0.1;
+    int const infection_time = 30;
 }
 
 auto evolve(Board const& board)
 {
     Board new_board = board;
     
-    for (int row = 0; row < board.size_(); row++)
+    for (int row = 0; row < board.get_size(); row++)
     {
-        for (int column = 0; column < board.size_(); column++)
+        for (int column = 0; column < board.get_size(); column++)
         {
             Cell current_cell = board(row, column); 
 
@@ -24,11 +24,16 @@ auto evolve(Board const& board)
             if (current_cell.status == state::infected)
             {
                 //Infect other cells
-                for (int i = 0; i < (2 * infection_constants::radius + 1; i++)
+                for (int i = 0; i < (2 * infection_constants::radius + 1); i++)
                 {
                     for (int j = 0; i < (2 * infection_constants::radius + 1); i++)
                     {
-                        if (new_board(i, j).state == state::Susceptible)
+                      int coord_x = (row - infection_constants::radius) + i;
+                      int coord_y = (column - infection_constants::radius) + j;
+                      
+                      if (coord_x >= 0 && coord_y >= 0 && coord_x < board.get_size() && coord_y < board.get_size())
+                      {
+                        if (new_board(coord_x, coord_y).status == state::susceptible)
                         {
                             // controllare che è veramente casuale
                             std::random_device e;
@@ -36,8 +41,9 @@ auto evolve(Board const& board)
                             double random = distribution(e);
 
                             if (random < infection_constants::infection_probability)
-                                new_board(i, j).state = state::infected;
+                                new_board(coord_x, coord_y).status = state::infected;
                         }
+                      }
                     }
                 }
 
@@ -48,7 +54,7 @@ auto evolve(Board const& board)
                 } 
                 else 
                 {
-                    new_board(row, column).state = state::immune; 
+                    new_board(row, column).status = state::immune; 
                 }
             }
 
@@ -62,22 +68,22 @@ auto evolve(Board const& board)
                 std::random_device a;
                 std::random_device b;
                 std::uniform_real_distribution<int> distribution(0,1); //La distribuzione potrebbe essere cambiata e riflettere della dimensione della board
-                new_board(row, column).vx = distribution(a);
-                new_board(row, column).vy = distribution(b);
+                new_board(row, column).Vx = distribution(a);
+                new_board(row, column).Vy = distribution(b);
                 
                 //for readability
-                int vx = &new_board(row, column).vx;
-                int vy = &new_board(row, column).vy;
+                int vx = new_board(row, column).Vx;
+                int vy = new_board(row, column).Vy;
                 
 
                 //Boundary conditions
-                if (row + vx > new_board.size_() || row + vx < 0)
+                if (row + vx > new_board.get_size() || row + vx < 0)
                     vx = -vx;
 
-                if (column + vy > new_board.size_() || column + vy < 0 )
+                if (column + vy > new_board.get_size() || column + vy < 0 )
                     vy -vy;
 
-                if (new_board(row + vx, column + vy).state == state::non_existant)
+                if (new_board(row + vx, column + vy).status == state::non_existant)
                 {
                     new_board(row + vx, column + vy) = new_board(row, column);
                     new_board(row, column) = Cell(state::non_existant); // Assicurarsi che funzioni questa riassegnazione
