@@ -51,5 +51,6 @@ bool Board::insertCell(int r, int c)
         }
         else
             return false;
-    }
+    } else
+    return false;
 }
