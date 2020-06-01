@@ -2,11 +2,13 @@
 #include "board.hpp"
 #include <vector>
 #include <random>
+#include <cstdlib>
+#include <ctime>
 
 namespace infection_constants
 {
     int const radius = 1;
-    double const infection_probability = 0.1;
+    float const infection_probability = 0.1;
     int const infection_time = 30;
 }
 
@@ -65,11 +67,10 @@ Board evolve(Board const& board)
                 int failure_counter = 0;
                 while (failure_counter != 8)
                 {
-                std::random_device a;
-                std::random_device b;
-                std::uniform_real_distribution<int> distribution(0,1); //La distribuzione potrebbe essere cambiata e riflettere della dimensione della board
-                new_board(row, column).Vx = distribution(a);
-                new_board(row, column).Vy = distribution(b);
+                    srand(time(0)); // Questo risolve il problema però non è veramente random
+                
+                    new_board(row, column).Vx = (rand() % 2);
+                    new_board(row, column).Vy = (rand() % 2);
                 
                 //for readability
                 int vx = new_board(row, column).Vx;
