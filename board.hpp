@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include<iostream>
+#include <iostream>
 #include <cassert>
 enum state { susceptible, dead, immune, non_existant, infected };
 class Cell
@@ -27,7 +27,7 @@ public:
     bool insertCell(int r, int c);
 
     Cell& operator()(int x, int y)
-    {
+    {        
         assert(x >= 0 && x < size&& y >= 0 && y < size);
         return board_[x][y];
     }
