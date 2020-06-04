@@ -81,10 +81,10 @@ Board evolve(Board const& board)
                 
 
                 //Boundary conditions
-                if (row + vx > new_board.get_size() || row + vx < 0)
+                if (row + vx >= new_board.get_size() || row + vx < 0)
                     vx = -vx;
 
-                if (column + vy > new_board.get_size() || column + vy < 0 )
+                if (column + vy >= new_board.get_size() || column + vy < 0 )
                     vy = -vy;
 
                 if (new_board(row + vx, column + vy).status == state::non_existant)

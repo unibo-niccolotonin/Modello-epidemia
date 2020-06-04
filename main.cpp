@@ -14,7 +14,6 @@ int main(int argc, const char * argv[]) {
     board.insertCell(2, 3);
     board.insertCell(2, 5);
     
-    
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "Simulazione infezione", sf::Style::Default);
     window.setFramerateLimit(60);
 
