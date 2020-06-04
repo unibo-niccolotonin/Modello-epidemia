@@ -27,7 +27,7 @@ public:
     bool insertCell(int r, int c);
 
     Cell& operator()(int x, int y)
-    {        
+    {
         assert(x >= 0 && x < size&& y >= 0 && y < size);
         return board_[x][y];
     }

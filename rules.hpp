@@ -2,8 +2,6 @@
 #include "board.hpp"
 #include <vector>
 #include <random>
-#include <cstdlib>
-#include <ctime>
 
 namespace infection_constants
 {
@@ -20,7 +18,7 @@ Board evolve(Board const& board)
     {
         for (int column = 0; column < board.get_size(); column++)
         {
-            Cell current_cell = board(row, column); 
+            Cell current_cell = board(row, column);
 
             //infection
             if (current_cell.status == state::infected)
@@ -53,10 +51,10 @@ Board evolve(Board const& board)
                 if (new_board(row, column).clock < infection_constants::infection_time) //Change time to a variable
                 {
                     new_board(row, column).clock++;
-                } 
-                else 
+                }
+                else
                 {
-                    new_board(row, column).status = state::immune; 
+                    new_board(row, column).status = state::immune;
                 }
             }
 
@@ -65,12 +63,17 @@ Board evolve(Board const& board)
             if (current_cell.status != state::non_existant)
             {
                 int failure_counter = 0;
+                
+                std::random_device e;
+                auto distribution = std::uniform_int_distribution<int>(-1, 1);
+                
                 while (failure_counter != 8)
                 {
-                    srand(time(0)); // Questo risolve il problema però non è veramente random
-                
-                    new_board(row, column).Vx = (rand() % 2);
-                    new_board(row, column).Vy = (rand() % 2);
+                    //srand(time(0)); // Questo risolve il problema però non è veramente random
+                    std::random_device e;
+                    
+                    new_board(row, column).Vx = distribution(e);
+                    new_board(row, column).Vy = distribution(e);
                 
                 //for readability
                 int vx = new_board(row, column).Vx;

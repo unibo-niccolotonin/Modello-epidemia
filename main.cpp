@@ -30,7 +30,8 @@ int main(int argc, const char * argv[]) {
     window.clear();
 
     //Update
-        
+    board = evolve(board);
+    
     float const length = 5.f;
     float x = 0.f;
     float y = 0.f;
