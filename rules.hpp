@@ -6,7 +6,7 @@
 namespace infection_constants
 {
     int const radius = 1;
-    float const infection_probability = 0.1;
+    float const infection_probability = 1;
     int const infection_time = 30;
 }
 
@@ -26,7 +26,7 @@ Board evolve(Board const& board)
                 //Infect other cells
                 for (int i = 0; i < (2 * infection_constants::radius + 1); i++)
                 {
-                    for (int j = 0; i < (2 * infection_constants::radius + 1); i++)
+                    for (int j = 0; j < (2 * infection_constants::radius + 1); j++)
                     {
                       int coord_x = (row - infection_constants::radius) + i;
                       int coord_y = (column - infection_constants::radius) + j;
@@ -95,10 +95,11 @@ Board evolve(Board const& board)
                     break;
                 }
                 failure_counter++;
-
+                
                 }
+             
             }
-
+            
         }
     }
 
