@@ -9,10 +9,12 @@
 
 int main(int argc, const char * argv[]) {
     Board board(20);
-
-    board.insertCell(4, 5);
-    board.insertCell(2, 3);
-    board.insertCell(2, 5);
+    
+    float const length = 10.f;
+    
+    board.insertCell(1, 1, state::infected);
+    
+    
     
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "Simulazione infezione", sf::Style::Default);
     window.setFramerateLimit(60);
@@ -24,14 +26,23 @@ int main(int argc, const char * argv[]) {
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (event.type == sf::Event::MouseButtonPressed)
+            {
+                int x = std::floor(event.mouseButton.x / length);
+                int y = std::floor(event.mouseButton.y / length);
+                
+                // Occorre risolvere il problema che non è calibrato quando la finestra viene ridimensionata
+                
+                board.insertCell(y, x);
+            }
         }
+    //Aggiunge una cellula
 
     window.clear();
 
     //Update
     board = evolve(board);
     
-    float const length = 5.f;
     float x = 0.f;
     float y = 0.f;
     sf::RectangleShape rect(sf::Vector2f(length, length));
@@ -45,7 +56,7 @@ int main(int argc, const char * argv[]) {
             switch(board(i, j).status)
             {
                 case state::non_existant:
-                    rect.setFillColor(sf::Color(0,0,0,255)); //Black
+                    rect.setFillColor(sf::Color(30,30,30,255)); //Black
                     break;
                 case state::susceptible:
                     rect.setFillColor(sf::Color(54, 42, 201, 255)); //Blue
@@ -72,7 +83,7 @@ int main(int argc, const char * argv[]) {
     //Display board
     window.display();
         
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::this_thread::sleep_for(std::chrono::milliseconds(00));
     }
     return 0;
     
