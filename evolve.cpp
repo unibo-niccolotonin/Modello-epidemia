@@ -1,7 +1,7 @@
-#pragma once
-#include "board.hpp"
 #include <vector>
 #include <random>
+#include "board.hpp"
+#include "board_functions.hpp"
 
 namespace infection_constants
 {
