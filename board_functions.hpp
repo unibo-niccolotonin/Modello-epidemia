@@ -5,4 +5,4 @@
 #include "board.hpp"
 
 Board evolve(Board const& board);
-void draw(sf::RenderWindow const& window, Board const& board, float const& length);
+void draw(sf::RenderWindow& window, Board const& board, float const& length);
