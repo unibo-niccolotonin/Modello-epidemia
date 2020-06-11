@@ -9,13 +9,19 @@
 #include "board_functions.hpp"
 
 int main(int argc, const char * argv[]) {
-    Board board(20);
+    Board board(50);
+    int cycle = 0;
     
     float const length = 10.f;
     
-    board.insertCell(1, 1, state::infected);
+    board.insertCell(2, 4, state::infected);
+    for (int i = 0; i < 20; i++)
+        for (int j = 0; j < 20; j++)
+            board.insertCell(i, j);
     
-    
+    board.cell_length = 10.0f;
+    board.graph_column_width = 4.0f;
+    board.graph_height = 300.0f;
     
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "Simulazione infezione", sf::Style::Default);
     window.setFramerateLimit(60);
@@ -38,18 +44,20 @@ int main(int argc, const char * argv[]) {
             }
         }
 
-    window.clear();
-
     //Update
     board = evolve(board);
 
     //Draw board
-    draw(window, board, length);
+    draw(window, board, cycle);
 
     //Display board
     window.display();
+    
+        if (cycle * static_cast<int>(board.graph_column_width) >= window.getSize().x) cycle = 0;
         
-        std::this_thread::sleep_for(std::chrono::milliseconds(00));
+        cycle++;
+        
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
     return 0;
     

@@ -5,8 +5,8 @@
 
 namespace infection_constants
 {
-    int const radius = 3;
-float const infection_probability = 0.5;
+    int const radius = 1;
+    float const infection_probability = 0.05;
     int const infection_time = 30;
     double mortality_rate = 0.2;
 }
