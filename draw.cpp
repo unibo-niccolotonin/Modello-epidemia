@@ -6,7 +6,7 @@
 #include <array>
 #include <cmath>
 
-void draw (sf::RenderWindow& window, Board const& board, std::vector<std::array<int, 4>>& graph)
+void draw (sf::RenderWindow& window, Board const& board, std::vector<std::array<int, 4> >& graph)
 {
     float x = 0.f;
     float y = 0.f;
@@ -64,8 +64,10 @@ void draw (sf::RenderWindow& window, Board const& board, std::vector<std::array<
     int height_infected = board.graph_height;
     
     if (graph.size() * board.graph_column_width <= window.getSize().x)
-        graph.push_back(std::array<int, 4>{height_infected, height_dead, height_immune, height_susceptible});
-    
+    {
+        std::array<int, 4> arr = {height_infected, height_dead, height_immune, height_susceptible};
+        graph.push_back(arr);
+    }
     
     
     for (int i = 0; i < graph.size(); i++)

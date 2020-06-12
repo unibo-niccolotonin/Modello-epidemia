@@ -3,6 +3,7 @@
 #include <SFML/System.hpp>
 #include <iostream>
 #include <array>
+#include <vector>
 #include <chrono>
 #include <thread>
 #include <cmath>
@@ -13,7 +14,7 @@ int main(int argc, const char * argv[]) {
     Board board(50);
     
     //Contiene le varie altezze delle colonne per disegnare il grafico della curva d'infezione
-    std::vector<std::array<int, 4>> graph;
+    std::vector<std::array<int, 4> > graph;
     
     int cycle = 0;
     
