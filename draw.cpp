@@ -8,7 +8,7 @@
 #include <iostream>
 
 void draw(sf::RenderWindow &window, Board const &board,
-          std::vector<std::array<int, 4>> &graph) {
+          std::vector<std::array<int, 4> > &graph_column_heights){
   float x = 0.f;
   float y = 0.f;
 
@@ -67,21 +67,21 @@ void draw(sf::RenderWindow &window, Board const &board,
       height_immune + std::round(n_dead / n_total * board.graph_height);
   int height_infected = board.graph_height;
 
-  if (graph.size() * board.graph_column_width <= window.getSize().x) {
+  if (graph_column_heights.size() * board.graph_column_width <= window.getSize().x) {
     std::array<int, 4> arr = {height_infected, height_dead, height_immune,
                               height_susceptible};
-    graph.push_back(arr);
+    graph_column_heights.push_back(arr);
   }
 
-  for (int i = 0; i < static_cast<int>(graph.size()); i++) {
+  for (int i = 0; i < static_cast<int>(graph_column_heights.size()); i++) {
     sf::RectangleShape column_Infected(
-        sf::Vector2f(board.graph_column_width, graph[i][0]));
+        sf::Vector2f(board.graph_column_width, graph_column_heights[i][0]));
     sf::RectangleShape column_Dead(
-        sf::Vector2f(board.graph_column_width, graph[i][1]));
+        sf::Vector2f(board.graph_column_width, graph_column_heights[i][1]));
     sf::RectangleShape column_Immune(
-        sf::Vector2f(board.graph_column_width, graph[i][2]));
+        sf::Vector2f(board.graph_column_width, graph_column_heights[i][2]));
     sf::RectangleShape column_Susceptible(
-        sf::Vector2f(board.graph_column_width, graph[i][3]));
+        sf::Vector2f(board.graph_column_width, graph_column_heights[i][3]));
 
     column_Susceptible.setPosition(i * board.graph_column_width,
                                    board.get_size() * board.cell_length);

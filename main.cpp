@@ -14,9 +14,10 @@ int main() {
 
   Board board(50);
   std::cout << "Suscettibili   Infetti   Rimossi\n";
+    
   // Contiene le varie altezze delle colonne per disegnare il grafico della
   // curva d'infezione
-  std::vector<std::array<int, 4>> graph;
+  std::vector<std::array<int, 4> > graph_columns_heights;
 
   float const length = 10.f;
 
@@ -45,22 +46,14 @@ int main() {
         int x = std::floor(event.mouseButton.x / length);
         int y = std::floor(event.mouseButton.y / length);
 
-        // Occorre risolvere il problema che non è calibrato quando la finestra
-        // viene ridimensionata
-
         board.insertCell(y, x);
       }
     }
-
-    window.clear();
-
-    // Update
+      
     board = evolve(board);
-
-    // Draw board
-    draw(window, board, graph);
-
-    // Display board
+      
+    window.clear();
+    draw(window, board, graph_columns_heights);
     window.display();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(50));

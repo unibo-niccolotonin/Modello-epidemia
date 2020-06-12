@@ -3,10 +3,10 @@
 #include <iostream>
 #include <vector>
 
-Cell Board::m_null_cell = Cell(NON_EXISTANT);
+Cell Board::null_cell_ = Cell(NON_EXISTANT);
 
 bool Board::insertCell(int r, int c) {
-  if (r >= 0 && c >= 0 && r < size && c < size) {
+  if (r >= 0 && c >= 0 && r < size_ && c < size_) {
     if (board_[r][c].status == NON_EXISTANT) {
       board_[r][c].status = SUSCEPTIBLE;
       return true;
@@ -16,10 +16,10 @@ bool Board::insertCell(int r, int c) {
     return false;
 };
 
-bool Board::insertCell(int r, int c, state statocellula) {
-  if (r >= 0 && c >= 0 && r < size && c < size) {
+bool Board::insertCell(int r, int c, state cell_state) {
+  if (r >= 0 && c >= 0 && r < size_ && c < size_) {
     if (board_[r][c].status == NON_EXISTANT) {
-      board_[r][c].status = statocellula;
+      board_[r][c].status = cell_state;
       return true;
     } else
       return false;
@@ -28,15 +28,14 @@ bool Board::insertCell(int r, int c, state statocellula) {
 }
 
 Cell &Board::operator()(int y, int x) {
-  // assert(x >= 0 && x < size&& y >= 0 && y < size);
-  if (x >= 0 && x < size && y >= 0 && y < size) {
+  if (x >= 0 && x < size_ && y >= 0 && y < size_) {
     return board_[y][x];
   } else
-    return m_null_cell;
+    return null_cell_;
 }
 
 Cell Board::operator()(int y, int x) const {
-  if (x >= 0 && x < size && y >= 0 && y < size) {
+  if (x >= 0 && x < size_ && y >= 0 && y < size_) {
     return board_[y][x];
   } else
     return Cell(NON_EXISTANT);

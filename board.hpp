@@ -13,24 +13,24 @@ public:
 };
 
 class Board {
-  int size;
-  std::vector<std::vector<Cell>> board_;
-  static Cell m_null_cell;
+  int size_;
+  std::vector<std::vector<Cell> > board_;
+  static Cell null_cell_;
 
 public:
   float cell_length;
   float graph_height;
   float graph_column_width;
 
-  int get_size() const { return size; }
+  int get_size() const { return size_; }
   bool insertCell(int r, int c);
-  bool insertCell(int r, int c, state statocellula);
+  bool insertCell(int r, int c, state cell_state);
 
   Cell &operator()(int y, int x);
 
   Cell operator()(int y, int x) const;
 
   Board(int n)
-      : size(n), board_(n, std::vector<Cell>(n, Cell(NON_EXISTANT))),
+      : size_(n), board_(n, std::vector<Cell>(n, Cell(NON_EXISTANT))),
         cell_length(5.0f), graph_height(100.0f), graph_column_width(2.0f){};
 };

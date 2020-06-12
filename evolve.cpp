@@ -6,7 +6,7 @@
 namespace infection_constants
 {
     int const radius = 1;
-    float const infection_probability = 0.05;
+    float const infection_probability = 0.2;
     int const infection_time = 10;
     double mortality_rate = 0.2;
     } // namespace infection_constants
@@ -15,7 +15,7 @@ Board evolve(Board const& board)
 {
     Board new_board = board;
     
-    std::random_device e;
+    std::random_device device;
     std::uniform_real_distribution<double> distribution_for_probability(0, 1);
     std::uniform_int_distribution<int> velocity_distribution(-1, 1);
     
@@ -25,7 +25,7 @@ Board evolve(Board const& board)
         {
             Cell current_cell = board(row, column);
             
-            //Cellule infette
+            //Comportamento delle cellule infette
             if (current_cell.status == INFECTED)
             {
                 
@@ -40,7 +40,7 @@ Board evolve(Board const& board)
 
                         if (new_board(coord_y, coord_x).status == SUSCEPTIBLE)
                         {
-                            double random = distribution_for_probability(e);
+                            double random = distribution_for_probability(device);
 
                             if (random < infection_constants::infection_probability)
                                 new_board(coord_y, coord_x).status = INFECTED;
@@ -55,7 +55,7 @@ Board evolve(Board const& board)
                 }
                 else
                 {
-                    double nrand = distribution_for_probability(e);
+                    double nrand = distribution_for_probability(device);
                     if (nrand <= infection_constants::mortality_rate)
                     {
                         new_board(row, column).status = DEAD;
@@ -69,7 +69,7 @@ Board evolve(Board const& board)
         }
     }
     
-    /* Abbiamo deciso di mettere il processo di infezione e quello di movimento in for loops separati per diminuire il bias verso le cellule in alto a sinistra che vengono valutate per prima. A dir la verità il bias non si nota se il valore massimo della velocità è basso. In caso contrario però, si può notare che mediamente il numero di cellule mai infettate è più alto. La nostra ipotesi è che questo è causato in quanto esse hanno più probabilità di allontanarsi dal blocco principale di cellule quando vengono inserite inizialmente. Non abbiamo rivelato un consumo della performance significativo aggiungendo i for loops per il movimento, dunque li abbiamo inclusi */
+    /* Abbiamo deciso di mettere il processo di infezione device quello di movimento in for loops separati per diminuire il bias verso le cellule in alto a sinistra che vengono valutate per prima. A dir la verità il bias non si nota se il valore massimo della velocità è basso. In caso contrario però, si può notare che mediamente il numero di cellule mai infettate è più alto. La nostra ipotesi è che questo è causato in quanto esse hanno più probabilità di allontanarsi dal blocco principale di cellule quando vengono inserite inizialmente. Non abbiamo rivelato un consumo della performance significativo aggiungendo i for loops per il movimento, dunque li abbiamo inclusi */
     
     //Movimento delle cellule
     
@@ -85,12 +85,11 @@ Board evolve(Board const& board)
 
                 while (failure_counter != 1) // Se si mette un valore maggiore di uno il movimento appare più casuale. La performance del programma però ne risente quando ci sono molte cellule
                 {
-                    std::random_device e;
+                    std::random_device device;
 
-                    new_board(row, column).vx = velocity_distribution(e);
-                    new_board(row, column).vy = velocity_distribution(e);
+                    new_board(row, column).vx = velocity_distribution(device);
+                    new_board(row, column).vy = velocity_distribution(device);
 
-                    //Per leggibilità
                     int vx = new_board(row, column).vx;
                     int vy = new_board(row, column).vy;
 
