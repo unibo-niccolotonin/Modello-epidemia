@@ -95,15 +95,15 @@ Board evolve(Board const& board)
 
 
                     //Ribalta la velocità della cellula se va fuori la griglia
-                    if (row + vx >= new_board.get_size() || row + vx < 0)
+                    if (column + vx >= new_board.get_size() || column + vx < 0)
                         vx = -vx;
 
-                    if (column + vy >= new_board.get_size() || column + vy < 0)
+                    if (row + vy >= new_board.get_size() || row + vy < 0)
                         vy = -vy;
 
-                    if (new_board(row + vx, column + vy).status == NON_EXISTANT)
+                    if (new_board(row + vy, column + vx).status == NON_EXISTANT)
                     {
-                        new_board(row + vx, column + vy) = new_board(row, column);
+                        new_board(row + vy, column + vx) = new_board(row, column);
                         new_board(row, column) = Cell(NON_EXISTANT);
 
                         break;
