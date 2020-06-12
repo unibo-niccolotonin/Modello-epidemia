@@ -340,3 +340,7 @@ ASALocalRun/
 healthchecksdb
 .vscode/tasks.json
 .vscode/settings.json
+
+.vs/
+.vscode/
+CppProperties.json
