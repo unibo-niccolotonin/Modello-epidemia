@@ -9,7 +9,7 @@ namespace infection_constants
     float const infection_probability = 0.05;
     int const infection_time = 10;
     double mortality_rate = 0.2;
-}
+    } // namespace infection_constants
 
 Board evolve(Board const& board)
 {
