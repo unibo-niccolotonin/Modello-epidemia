@@ -20,7 +20,7 @@ int main(int argc, const char* argv[]) {
 
     float const length = 10.f;
 
-    board.insertCell(2, 4, state::infected);
+    board.insertCell(2, 4, INFECTED);
     for (int i = 0; i < 10; i++)
         for (int j = 0; j < 10; j++)
             board.insertCell(i, j);

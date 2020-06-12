@@ -26,7 +26,7 @@ Board evolve(Board const& board)
             Cell current_cell = board(row, column);
             
             //Cellule infette
-            if (current_cell.status == state::infected)
+            if (current_cell.status == INFECTED)
             {
                 
                 //Infetta le altre cellule dentro il raggio
@@ -38,12 +38,12 @@ Board evolve(Board const& board)
                         int coord_x = (column - infection_constants::radius) + j;
 
 
-                        if (new_board(coord_y, coord_x).status == state::susceptible)
+                        if (new_board(coord_y, coord_x).status == SUSCEPTIBLE)
                         {
                             double random = distribution_for_probability(e);
 
                             if (random < infection_constants::infection_probability)
-                                new_board(coord_y, coord_x).status = state::infected;
+                                new_board(coord_y, coord_x).status = INFECTED;
                         }
                 }
                 }
@@ -58,11 +58,11 @@ Board evolve(Board const& board)
                     double nrand = distribution_for_probability(e);
                     if (nrand <= infection_constants::mortality_rate)
                     {
-                        new_board(row, column).status = state::dead;
+                        new_board(row, column).status = DEAD;
                     }
                     else
                     {
-                        new_board(row, column).status = state::immune;
+                        new_board(row, column).status = IMMUNE;
                     }
                 }
             }
@@ -79,7 +79,7 @@ Board evolve(Board const& board)
         {
             Cell current_cell = board(row, column);
     
-            if ((current_cell.status != state::non_existant) && (current_cell.status != state::dead))
+            if ((current_cell.status != NON_EXISTANT) && (current_cell.status != DEAD))
             {
                 int failure_counter = 0;
 
@@ -102,10 +102,10 @@ Board evolve(Board const& board)
                     if (column + vy >= new_board.get_size() || column + vy < 0)
                         vy = -vy;
 
-                    if (new_board(row + vx, column + vy).status == state::non_existant)
+                    if (new_board(row + vx, column + vy).status == NON_EXISTANT)
                     {
                         new_board(row + vx, column + vy) = new_board(row, column);
-                        new_board(row, column) = Cell(state::non_existant);
+                        new_board(row, column) = Cell(NON_EXISTANT);
 
                         break;
                     }

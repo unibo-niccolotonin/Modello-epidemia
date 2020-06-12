@@ -26,22 +26,22 @@ void draw(sf::RenderWindow& window, Board const& board, std::vector<std::array<i
         {
             switch (board(i, j).status)
             {
-            case state::non_existant:
+            case NON_EXISTANT:
                 cell_square.setFillColor(sf::Color(30, 30, 30, 255)); //Black
                 break;
-            case state::susceptible:
+            case SUSCEPTIBLE:
                 cell_square.setFillColor(sf::Color(54, 42, 201, 255)); //Blue
                 n_susceptible++;
                 break;
-            case state::infected:
+            case INFECTED:
                 cell_square.setFillColor(sf::Color(209, 26, 29, 255)); //Red
                 n_infected++;
                 break;
-            case state::immune:
+            case IMMUNE:
                 cell_square.setFillColor(sf::Color(43, 229, 6, 255)); //Green
                 n_immune++;
                 break;
-            case state::dead:
+            case DEAD:
                 cell_square.setFillColor(sf::Color(111, 111, 111, 255)); //Gray
                 n_dead++;
                 break;

@@ -3,15 +3,15 @@
 #include <iostream>
 #include <cassert>
 
-Cell Board::m_null_cell = Cell(state::non_existant);
+Cell Board::m_null_cell = Cell(NON_EXISTANT);
 
 bool Board::insertCell(int r, int c)
 {
     if (r >= 0 && c >= 0 && r < size && c < size)
     {
-        if (board_[r][c].status == state::non_existant)
+        if (board_[r][c].status == NON_EXISTANT)
         {
-            board_[r][c].status = state::susceptible;
+            board_[r][c].status = SUSCEPTIBLE;
             return true;
         }
         else
@@ -25,7 +25,7 @@ bool Board::insertCell(int r, int c, state statocellula)
 {
     if (r >= 0 && c >= 0 && r < size && c < size)
     {
-        if (board_[r][c].status == state::non_existant)
+        if (board_[r][c].status == NON_EXISTANT)
         {
             board_[r][c].status = statocellula;
             return true;
@@ -53,5 +53,5 @@ Cell Board::operator()(int y, int x) const
         {
             return board_[y][x];
         } else
-            return Cell(state::non_existant);
+            return Cell(NON_EXISTANT);
     }

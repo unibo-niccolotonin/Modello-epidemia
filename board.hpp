@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cassert>
 
-enum state { susceptible, dead, immune, non_existant, infected };
+enum state { SUSCEPTIBLE, DEAD, IMMUNE, NON_EXISTANT, INFECTED };
 class Cell
 {
 public:
@@ -19,7 +19,7 @@ class Board
     std::vector<std::vector<Cell> > board_;
     static Cell m_null_cell;
 public:
-    Board(int n) : cell_length(5.0f), graph_height(100.0f), graph_column_width(2.0f), size(n), board_(n, std::vector<Cell>(n, Cell(state::non_existant))) {};
+    Board(int n) : cell_length(5.0f), graph_height(100.0f), graph_column_width(2.0f), size(n), board_(n, std::vector<Cell>(n, Cell(NON_EXISTANT))) {};
     
     float cell_length;
     float graph_height;
