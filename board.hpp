@@ -19,7 +19,6 @@ class Board
     std::vector<std::vector<Cell> > board_;
     static Cell m_null_cell;
 public:
-    Board(int n) : cell_length(5.0f), graph_height(100.0f), graph_column_width(2.0f), size(n), board_(n, std::vector<Cell>(n, Cell(NON_EXISTANT))) {};
     
     float cell_length;
     float graph_height;
@@ -33,4 +32,5 @@ public:
 
     Cell operator()(int y, int x) const;
 
+    Board(int n) : size(n), board_(n, std::vector<Cell>(n, Cell(NON_EXISTANT))),  cell_length(5.0f), graph_height(100.0f), graph_column_width(2.0f) {};
 };

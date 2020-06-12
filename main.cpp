@@ -10,13 +10,11 @@
 #include "board.hpp"
 #include "board_functions.hpp"
 
-int main(int argc, const char* argv[]) {
+int main() {
     Board board(50);
     std::cout << "Suscettibili   Infetti   Rimossi\n";
     //Contiene le varie altezze delle colonne per disegnare il grafico della curva d'infezione
     std::vector<std::array<int, 4> > graph;
-
-    int cycle = 0;
 
     float const length = 10.f;
 
@@ -60,10 +58,6 @@ int main(int argc, const char* argv[]) {
 
         //Display board
         window.display();
-
-        if (cycle * static_cast<int>(board.graph_column_width) >= window.getSize().x) cycle = 0;
-
-        cycle++;
 
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }

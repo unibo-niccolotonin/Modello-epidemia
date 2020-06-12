@@ -72,7 +72,7 @@ void draw(sf::RenderWindow& window, Board const& board, std::vector<std::array<i
     }
 
 
-    for (int i = 0; i < graph.size(); i++)
+    for (int i = 0; i < static_cast<int>(graph.size()); i++)
     {
         sf::RectangleShape column_Infected(sf::Vector2f(board.graph_column_width, graph[i][0]));
         sf::RectangleShape column_Dead(sf::Vector2f(board.graph_column_width, graph[i][1]));
