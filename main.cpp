@@ -21,8 +21,8 @@ int main(int argc, const char * argv[]) {
     float const length = 10.f;
     
     board.insertCell(2, 4, state::infected);
-    for (int i = 0; i < 20; i++)
-        for (int j = 0; j < 20; j++)
+    for (int i = 0; i < 10; i++)
+        for (int j = 0; j < 10; j++)
             board.insertCell(i, j);
     
     board.cell_length = 10.0f;

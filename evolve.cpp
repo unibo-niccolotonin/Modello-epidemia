@@ -37,17 +37,15 @@ Board evolve(Board const& board)
                         int coord_y = (row - infection_constants::radius) + i;
                         int coord_x = (column - infection_constants::radius) + j;
 
-                        //if (coord_y >= 0 && coord_x >= 0 && coord_y < board.get_size() && coord_x < board.get_size())
-                        //{
-                            if (new_board(coord_y, coord_x).status == state::susceptible)
-                            {
-                                double random = distribution_for_probability(e);
 
-                                if (random < infection_constants::infection_probability)
-                                    new_board(coord_y, coord_x).status = state::infected;
-                            }
-                        //}
-                    }
+                        if (new_board(coord_y, coord_x).status == state::susceptible)
+                        {
+                            double random = distribution_for_probability(e);
+
+                            if (random < infection_constants::infection_probability)
+                                new_board(coord_y, coord_x).status = state::infected;
+                        }
+                }
                 }
 
                 // Questo if else aumenta la variabile clock fino a un valore definito, dopodiché decide se la cellula diventa immune o muore
@@ -68,8 +66,19 @@ Board evolve(Board const& board)
                     }
                 }
             }
-
-            //Movimento delle cellule
+        }
+    }
+    
+    /* Abbiamo deciso di mettere il processo di infezione e quello di movimento in for loops separati per diminuire il bias verso le cellule in alto a sinistra che vengono valutate per prima. A dir la verità il bias non si nota se il valore massimo della velocità è basso. In caso contrario però, si può notare che mediamente il numero di cellule mai infettate è più alto. La nostra ipotesi è che questo è causato in quanto esse hanno più probabilità di allontanarsi dal blocco principale di cellule quando vengono inserite inizialmente. Non abbiamo rivelato un consumo della performance significativo aggiungendo i for loops per il movimento, dunque li abbiamo inclusi */
+    
+    //Movimento delle cellule
+    
+    for (int row = 0; row < board.get_size(); row++)
+    {
+        for (int column = 0; column < board.get_size(); column++)
+        {
+            Cell current_cell = board(row, column);
+    
             if ((current_cell.status != state::non_existant) && (current_cell.status != state::dead))
             {
                 int failure_counter = 0;
@@ -108,6 +117,7 @@ Board evolve(Board const& board)
 
         }
     }
+    
 
 
     return new_board;
