@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cassert>
 
+Cell Board::m_null_cell = Cell(state::non_existant);
+
 bool Board::insertCell(int r, int c)
 {
     if (r >= 0 && c >= 0 && r < size && c < size)
@@ -35,14 +37,21 @@ bool Board::insertCell(int r, int c, state statocellula)
         return false;
 }
 
-Cell& Board::operator()(int x, int y)
+Cell& Board::operator()(int y, int x)
     {
-        assert(x >= 0 && x < size&& y >= 0 && y < size);
-        return board_[x][y];
+        //assert(x >= 0 && x < size&& y >= 0 && y < size);
+        if (x >= 0 && x < size&& y >= 0 && y < size)
+        {
+            return board_[y][x];
+        } else
+            return m_null_cell;
     }
 
-Cell Board::operator()(int x, int y) const
+Cell Board::operator()(int y, int x) const
     {
-        assert(x >= 0 && x < size&& y >= 0 && y < size);
-        return board_[x][y];
+        if (x >= 0 && x < size&& y >= 0 && y < size)
+        {
+            return board_[y][x];
+        } else
+            return Cell(state::non_existant);
     }

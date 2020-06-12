@@ -7,7 +7,7 @@ namespace infection_constants
 {
     int const radius = 1;
     float const infection_probability = 0.05;
-    int const infection_time = 30;
+    int const infection_time = 10;
     double mortality_rate = 0.2;
 }
 
@@ -37,8 +37,8 @@ Board evolve(Board const& board)
                         int coord_y = (row - infection_constants::radius) + i;
                         int coord_x = (column - infection_constants::radius) + j;
 
-                        if (coord_y >= 0 && coord_x >= 0 && coord_y < board.get_size() && coord_x < board.get_size())
-                        {
+                        //if (coord_y >= 0 && coord_x >= 0 && coord_y < board.get_size() && coord_x < board.get_size())
+                        //{
                             if (new_board(coord_y, coord_x).status == state::susceptible)
                             {
                                 double random = distribution_for_probability(e);
@@ -46,7 +46,7 @@ Board evolve(Board const& board)
                                 if (random < infection_constants::infection_probability)
                                     new_board(coord_y, coord_x).status = state::infected;
                             }
-                        }
+                        //}
                     }
                 }
 
@@ -78,12 +78,12 @@ Board evolve(Board const& board)
                 {
                     std::random_device e;
 
-                    new_board(row, column).Vx = velocity_distribution(e);
-                    new_board(row, column).Vy = velocity_distribution(e);
+                    new_board(row, column).vx = velocity_distribution(e);
+                    new_board(row, column).vy = velocity_distribution(e);
 
                     //Per leggibilità
-                    int vx = new_board(row, column).Vx;
-                    int vy = new_board(row, column).Vy;
+                    int vx = new_board(row, column).vx;
+                    int vy = new_board(row, column).vy;
 
 
                     //Ribalta la velocità della cellula se va fuori la griglia

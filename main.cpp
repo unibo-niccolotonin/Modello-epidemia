@@ -2,6 +2,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
+#include <array>
 #include <chrono>
 #include <thread>
 #include <cmath>
@@ -10,6 +11,10 @@
 
 int main(int argc, const char * argv[]) {
     Board board(50);
+    
+    //Contiene le varie altezze delle colonne per disegnare il grafico della curva d'infezione
+    std::vector<std::array<int, 4>> graph;
+    
     int cycle = 0;
     
     float const length = 10.f;
@@ -23,7 +28,7 @@ int main(int argc, const char * argv[]) {
     board.graph_column_width = 4.0f;
     board.graph_height = 300.0f;
     
-    sf::RenderWindow window(sf::VideoMode(1000, 1000), "Simulazione infezione", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(1000, 1000), "Simulazione infezione", sf::Style::Titlebar | sf::Style::Close);
     window.setFramerateLimit(60);
 
     sf::Event event;
@@ -44,11 +49,13 @@ int main(int argc, const char * argv[]) {
             }
         }
 
+        window.clear();
+        
     //Update
     board = evolve(board);
 
     //Draw board
-    draw(window, board, cycle);
+    draw(window, board, graph);
 
     //Display board
     window.display();
@@ -57,7 +64,7 @@ int main(int argc, const char * argv[]) {
         
         cycle++;
         
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
     return 0;
     

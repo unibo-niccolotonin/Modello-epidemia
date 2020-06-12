@@ -5,4 +5,4 @@
 #include "board.hpp"
 
 Board evolve(Board const& board);
-void draw(sf::RenderWindow& window, Board const& board, int const&cycle);
+void draw(sf::RenderWindow& window, Board const& board, std::vector<std::array<int, 4>>& graph);
