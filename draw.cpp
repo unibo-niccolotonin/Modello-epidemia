@@ -3,6 +3,7 @@
 #include <SFML/System.hpp>
 #include "board.hpp"
 #include "board_functions.hpp"
+#include <iostream>
 #include <array>
 #include <cmath>
 
