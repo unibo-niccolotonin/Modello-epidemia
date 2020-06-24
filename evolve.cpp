@@ -5,17 +5,17 @@
 
 namespace infection_constants
 {
-    int const radius = 1;
+    unsigned int const radius = 1;
     float const infection_probability = 0.2;
-    int const infection_time = 10;
-    double mortality_rate = 0.2;
-    } // namespace infection_constants
+    unsigned int const infection_time = 10;
+    float const mortality_rate = 0.2;
+} // namespace infection_constants
 
 Board evolve(Board const& board)
 {
     Board new_board = board;
     
-    std::random_device device;
+    std::mt19937 device;
     std::uniform_real_distribution<double> distribution_for_probability(0, 1);
     std::uniform_int_distribution<int> velocity_distribution(-1, 1);
     

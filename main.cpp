@@ -19,8 +19,6 @@ int main() {
   // curva d'infezione
   std::vector<std::array<int, 4> > graph_columns_heights;
 
-  float const length = 10.f;
-
   board.insertCell(2, 4, INFECTED);
   for (int i = 0; i < 10; i++)
     for (int j = 0; j < 10; j++)
@@ -30,21 +28,20 @@ int main() {
   board.graph_column_width = 4.0f;
   board.graph_height = 300.0f;
 
-  sf::RenderWindow window(sf::VideoMode(1000, 1000), "Simulazione infezione",
-                          sf::Style::Titlebar | sf::Style::Close);
+  sf::RenderWindow window(sf::VideoMode(1000, 1000), "Simulazione infezione", sf::Style::Titlebar | sf::Style::Close);
   window.setFramerateLimit(60);
 
   sf::Event event;
-  while (window.isOpen()) {
-    while (window.pollEvent(event)) {
+  while (window.isOpen()) 
+  {
+    while (window.pollEvent(event)) 
+    {
       if (event.type == sf::Event::Closed)
         window.close();
-      if (event.type ==
-          sf::Event::MouseButtonPressed) // aggiunge una cellula quando si
-                                         // clicca la finestra
+      if (event.type == sf::Event::MouseButtonPressed) // aggiunge una cellula quando si clicca la finestra
       {
-        int x = std::floor(event.mouseButton.x / length);
-        int y = std::floor(event.mouseButton.y / length);
+        int x = std::floor(event.mouseButton.x / board.cell_length);
+        int y = std::floor(event.mouseButton.y / board.cell_length);
 
         board.insertCell(y, x);
       }

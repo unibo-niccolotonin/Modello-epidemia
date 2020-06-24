@@ -344,3 +344,11 @@ healthchecksdb
 .vs/
 .vscode/
 CppProperties.json
+
+# Translation units
+main.o
+board.o
+evolve.o
+draw.o
+
+a.out
