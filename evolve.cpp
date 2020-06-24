@@ -1,7 +1,7 @@
 #include <vector>
 #include <random>
 #include "board.hpp"
-#include "board_functions.hpp"
+#include "evolve.hpp"
 
 namespace infection_constants
 {
