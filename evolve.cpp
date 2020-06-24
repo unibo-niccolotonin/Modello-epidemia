@@ -5,10 +5,10 @@
 
 namespace infection_constants
 {
-    unsigned int const radius = 1;
-    float const infection_probability = 0.2;
-    unsigned int const infection_time = 10;
-    float const mortality_rate = 0.2;
+    unsigned int radius = 1;
+    float infection_probability = 0.2;
+    unsigned int infection_time = 40;
+    float mortality_rate = 0.2;
 } // namespace infection_constants
 
 Board evolve(Board const& board)
