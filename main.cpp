@@ -11,8 +11,8 @@
 #include <thread>
 #include <vector>
 
-template <typename T> void loop_of_failure(T &var, int max_value) {
-  while (std::cin.fail() || var < 0 ||
+template <typename T> void loop_of_failure(T &var, int min_value, int max_value) {
+  while (std::cin.fail() || var < min_value ||
          var > max_value) { // verifica che il valore inserito non sia una
                             // stringa e che non sia negativo
     std::cout << "input non valido, inserire un valore corretto: ";
@@ -28,36 +28,36 @@ void set_values(Board &board) {
   std::cout << "inserire il raggio di infezione: ";
   std::cin >> Board::infection_radius;
 
-  loop_of_failure(Board::infection_radius, board.get_size());
+  loop_of_failure(Board::infection_radius, 0, board.get_size());
 
   std::cout << "\ninserire la probabilità di infezione fra 0 e 1: ";
   std::cin >> Board::infection_probability;
 
-  loop_of_failure(Board::infection_probability, 1);
+  loop_of_failure(Board::infection_probability,0 ,1);
 
   std::cout << "\ninserire il tempo di durata dell'infezione: ";
   std::cin >> Board::infection_time;
 
-  loop_of_failure(Board::infection_time, 1000000);
+  loop_of_failure(Board::infection_time, 0, 1000000);
 
-  std::cout << "\ninserire la probabilità di morte di una cellula infetta fra "
+  std::cout << "\ninserire il tasso di mortalità di una cellula infetta fra "
                "0 e 1: ";
   std::cin >> Board::mortality_rate;
 
-  loop_of_failure(Board::mortality_rate, 1);
+  loop_of_failure(Board::mortality_rate,0 ,1);
 
   int n_cells;
   std::cout << "\ninserire il numero di cellule suscettibili nella griglia, "
-               "non maggiore della metà delle celle nella board: ";
+               "almeno una e non maggiore alla metà delle celle nella board: ";
   std::cin >> n_cells;
-  loop_of_failure(n_cells, board.get_size() * board.get_size() / 2);
+  loop_of_failure(n_cells, 1, board.get_size() * board.get_size() / 2);
 
   board.fill_board(n_cells, SUSCEPTIBLE);
 
   std::cout << "\ninserire il numero di cellule infette nella griglia, non "
-               "maggiore della lunghezza del lato della griglia: ";
+               "maggiore alla lunghezza del lato della griglia: ";
   std::cin >> n_cells;
-  loop_of_failure(n_cells, board.get_size());
+  loop_of_failure(n_cells, 0, board.get_size());
 
   board.fill_board(n_cells, INFECTED);
 }
