@@ -1,5 +1,5 @@
-#include "draw.hpp"
 #include "board.hpp"
+#include "draw.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -8,7 +8,7 @@
 #include <iostream>
 
 void draw(sf::RenderWindow &window, Board const &board,
-          std::vector<std::array<int, 4>> &graph_column_heights) {
+          std::vector<std::array<int, 4> > &graph_column_heights){
   float x = 0.f;
   float y = 0.f;
 
@@ -60,8 +60,7 @@ void draw(sf::RenderWindow &window, Board const &board,
 
   int n_total = n_susceptible + n_immune + n_infected + n_dead;
 
-  assert(n_total != 0); // Questo assert è necessario in quanto in caso
-                        // contrario il grafico si rompe
+  assert(n_total != 0); // Questo assert è necessario in quanto in caso contrario il grafico si rompe
 
   int height_susceptible =
       std::round(n_susceptible / n_total * board.graph_height);
@@ -71,8 +70,7 @@ void draw(sf::RenderWindow &window, Board const &board,
       height_immune + std::round(n_dead / n_total * board.graph_height);
   int height_infected = board.graph_height;
 
-  if (graph_column_heights.size() * board.graph_column_width <=
-      window.getSize().x) {
+  if (graph_column_heights.size() * board.graph_column_width <= window.getSize().x) {
     std::array<int, 4> arr = {height_infected, height_dead, height_immune,
                               height_susceptible};
     graph_column_heights.push_back(arr);
