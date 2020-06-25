@@ -7,4 +7,4 @@
 #include <vector>
 
 void draw(sf::RenderWindow &window, Board const &board,
-          std::vector<std::array<int, 4> > &graph_column_heights);
+          std::vector<std::array<int, 4>> &graph_column_heights);

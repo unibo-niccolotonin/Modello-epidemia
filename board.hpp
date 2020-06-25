@@ -38,7 +38,8 @@ public:
   Cell operator()(int y, int x) const;
 
   Board(int n)
-      : size_(n), board_(n * n, Cell(NON_EXISTANT)),
-        cell_length(5.0f), graph_height(100.0f), graph_column_width(2.0f)
-    {assert(size_ > 0);};
+      : size_(n), board_(n * n, Cell(NON_EXISTANT)), cell_length(5.0f),
+        graph_height(100.0f), graph_column_width(2.0f) {
+    assert(size_ > 0);
+  };
 };
