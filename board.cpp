@@ -1,8 +1,8 @@
 #include "board.hpp"
 #include <cassert>
 #include <iostream>
-#include <vector>
 #include <random>
+#include <vector>
 
 float Board::infection_probability = 0.2;
 int Board::infection_radius = 1 ;

@@ -1,7 +1,7 @@
-#include <vector>
-#include <random>
-#include "board.hpp"
 #include "evolve.hpp"
+#include "board.hpp"
+#include <random>
+#include <vector>
 
 //Dobbiamo vedere se c'è un'alternativa a dichiararle variabili globali
 

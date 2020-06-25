@@ -1,5 +1,5 @@
-#include "board.hpp"
 #include "draw.hpp"
+#include "board.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>

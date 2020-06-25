@@ -1,6 +1,6 @@
 #include "board.hpp"
-#include "evolve.hpp"
 #include "draw.hpp"
+#include "evolve.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
