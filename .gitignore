@@ -351,4 +351,6 @@ board.o
 evolve.o
 draw.o
 
+.DS_Store
+
 a.out

@@ -4,8 +4,8 @@
 #include <vector>
 
 float Board::infection_probability = 0.2;
-unsigned int Board::infection_radius = 1 ;
-unsigned int Board::infection_time = 30;
+int Board::infection_radius = 1 ;
+int Board::infection_time = 30;
 float Board::mortality_rate = 0.3;
 
 Cell Board::null_cell_ = Cell(NON_EXISTANT);

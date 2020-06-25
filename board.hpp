@@ -18,9 +18,9 @@ class Board {
   static Cell null_cell_;
 
 public:
-    static unsigned int infection_radius;
+    static int infection_radius;
     static float infection_probability;
-    static unsigned int infection_time;
+    static int infection_time;
     static float mortality_rate;
 
   float cell_length;

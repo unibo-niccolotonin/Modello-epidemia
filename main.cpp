@@ -11,86 +11,41 @@
 #include <thread>
 #include <vector>
 
-void set_infection_constants(Board const& board)
+template<typename T>
+void loop_of_failure(T& var, int max_value)
+{
+    while (std::cin.fail() || var < 0 || var > max_value)
+    { //verifica che il valore inserito non sia una stringa e che non sia negativo
+        std::cout << "input non valido, inserire un valore corretto: ";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin >> var;
+    }
+}
+
+void set_infection_values(Board const& board)
 {
          //questa funzione serve ad inserire le variabili dell'infezione
         std::cout << "inserimento costanti:\n";
         std::cout << "inserire il raggio di infezione: ";
         std::cin >> Board::infection_radius;
-        while (std::cin.fail() || Board::infection_radius < 0) //verifica che il valore inserito non sia una stringa e che non sia negativo
-        {
-            if (std::cin.fail()) 
-            {
-                std::cout << "input non valido, inserire un valore corretto: ";
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cin >> Board::infection_radius;
-            }
-            if (Board::infection_radius < 0)
-            {
-                std::cout << "\ninput non valido, inserire un valore corretto: ";
-                std::cin >> Board::infection_radius;
-            }
+        
+        loop_of_failure(Board::infection_radius, board.get_size());
 
-        }
-        if (Board::infection_radius > board.get_size()) 
-        {
-            Board::infection_radius = board.get_size();
-        }
         std::cout << "\ninserire la probabilità di infezione: ";
         std::cin >> Board::infection_probability;
-        while (std::cin.fail() || Board::infection_probability > 1 || Board::infection_probability < 0) //verifica che il valore inserito sia corretto e che non sia una stringa
-        {
-            if (std::cin.fail())
-            {
-                std::cout << "input non valido, inserire un valore corretto: ";
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cin >> Board::infection_probability;
-            }
-            if (Board::infection_probability > 1 || Board::infection_probability < 0)
-            {
-                std::cout << "\ninput non valido, inserire un valore corretto: ";
-                std::cin >> Board::infection_probability;
-            }
-            
-        }
+        
+        loop_of_failure(Board::infection_probability, 1);
+
         std::cout << "\ninserire il tempo di durata dell'infezione: ";
         std::cin >> Board::infection_time;
-        while (std::cin.fail() || Board::infection_time < 0)
-        {
-            if (std::cin.fail())
-            {
-                std::cout << "input non valido, inserire un valore corretto: ";
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cin >> Board::infection_time;
-            }
-            if (Board::infection_time < 0)
-            {
-                std::cout << "\ninput non valido, inserire un valore corretto: ";
-                std::cin >> Board::infection_time;
-            }
+        
+        loop_of_failure(Board::infection_time, 1000000);
 
-        }
         std::cout << "\ninserire la probabilità di morte di una cellula infetta: ";
         std::cin >> Board::mortality_rate;
-        while (std::cin.fail() || Board::mortality_rate > 1 || Board::mortality_rate < 0)
-        {
-            if (std::cin.fail())
-            {
-                std::cout << "input non valido, inserire un valore corretto: ";
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cin >> Board::mortality_rate;
-            }
-            if (Board::mortality_rate > 1 || Board::mortality_rate < 0)
-            {
-                std::cout << "\ninput non valido, inserire un valore corretto: ";
-                std::cin >> Board::mortality_rate;
-            }
-
-        }
+        
+        loop_of_failure(Board::mortality_rate, 1);
 }
 
 int main() {
@@ -103,7 +58,7 @@ int main() {
     for (int j = 0; j < 10; j++)
       board.insertCell(i, j);
 
-  set_infection_constants(board);
+  set_infection_values(board);
 
 
   std::cout << "Suscettibili   Infetti   Rimossi\n";
