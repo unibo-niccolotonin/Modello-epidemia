@@ -86,10 +86,7 @@ void update_movement(int row, int column, Board const &board,
 
 Board evolve(Board const &board) {
   Board new_board = board;
-
-  std::uniform_real_distribution<double> distribution_for_probability(0, 1);
-  std::uniform_int_distribution<int> velocity_distribution(-1, 1);
-
+  
   for (int row = 0; row < board.get_size(); row++) {
     for (int column = 0; column < board.get_size(); column++) {
       Cell current_cell = board(row, column);
