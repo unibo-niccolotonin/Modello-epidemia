@@ -3,8 +3,6 @@
 #include <random>
 #include <vector>
 
-// Dobbiamo vedere se c'è un'alternativa a dichiararle variabili globali
-
 namespace random_generation {
 static std::random_device rd;
 static std::mt19937 device(rd());
@@ -86,7 +84,7 @@ void update_movement(int row, int column, Board const &board,
 
 Board evolve(Board const &board) {
   Board new_board = board;
-  
+
   for (int row = 0; row < board.get_size(); row++) {
     for (int column = 0; column < board.get_size(); column++) {
       Cell current_cell = board(row, column);
