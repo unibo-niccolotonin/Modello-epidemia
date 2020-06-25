@@ -13,7 +13,7 @@ static std::uniform_int_distribution<int> velocity_distribution(-1, 1);
 
 } // namespace random_generation
 
-void infect_radius(int row, int column, Board const &board, Board &new_board) {
+void infect_radius(int row, int column, Board &new_board) {
   for (int i = 0; i < (2 * Board::infection_radius + 1); i++) {
     for (int j = 0; j < (2 * Board::infection_radius + 1); j++) {
       int coord_y = (row - Board::infection_radius) + i;
@@ -30,9 +30,9 @@ void infect_radius(int row, int column, Board const &board, Board &new_board) {
   }
 }
 
-void update_infected_cells(int row, int column, Board const &board,
+void update_infected_cells(int row, int column,
                            Board &new_board) {
-  infect_radius(row, column, board, new_board);
+  infect_radius(row, column, new_board);
 
   if (new_board(row, column).clock < Board::infection_time) {
     new_board(row, column).clock++;
@@ -47,7 +47,7 @@ void update_infected_cells(int row, int column, Board const &board,
   }
 }
 
-void update_movement(int row, int column, Board const &board,
+void update_movement(int row, int column,
                      Board &new_board) {
   int failure_counter = 0;
 
@@ -91,7 +91,7 @@ Board evolve(Board const &board) {
 
       // Comportamento delle cellule infette
       if (current_cell.status == INFECTED)
-        update_infected_cells(row, column, board, new_board);
+        update_infected_cells(row, column, new_board);
     }
   }
 
@@ -114,7 +114,7 @@ Board evolve(Board const &board) {
 
       if ((current_cell.status != NON_EXISTANT) &&
           (current_cell.status != DEAD)) {
-        update_movement(row, column, board, new_board);
+        update_movement(row, column, new_board);
       }
     }
   }
