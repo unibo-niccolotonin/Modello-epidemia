@@ -18,10 +18,10 @@ class Board {
   static Cell null_cell_;
 
 public:
-    static int infection_radius;
-    static float infection_probability;
-    static int infection_time;
-    static float mortality_rate;
+  static int infection_radius;
+  static float infection_probability;
+  static int infection_time;
+  static float mortality_rate;
 
   float cell_length;
   float graph_height;
@@ -30,6 +30,8 @@ public:
   int get_size() const { return size_; }
   bool insertCell(int r, int c);
   bool insertCell(int r, int c, state cell_state);
+
+  void fill_board(int n);
 
   Cell &operator()(int y, int x);
 

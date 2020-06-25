@@ -52,12 +52,15 @@ void draw(sf::RenderWindow &window, Board const &board,
     y += board.cell_length;
     x = 0.f;
   }
+
   std::cout << n_susceptible << "             " << n_infected << "         "
             << (n_dead + n_immune) << "\n";
 
   // Disegna il grafico relativo alle proporzioni degli stati delle cellule
 
   int n_total = n_susceptible + n_immune + n_infected + n_dead;
+
+  assert(n_total != 0); // Questo assert è necessario in quanto in caso contrario il grafico si rompe
 
   int height_susceptible =
       std::round(n_susceptible / n_total * board.graph_height);

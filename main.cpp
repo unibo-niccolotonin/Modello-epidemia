@@ -52,14 +52,9 @@ int main() {
 
   Board board(50);
 
-  board.insertCell(5, 5, INFECTED);
-
-  for (int i = 0; i < 10; i++)
-    for (int j = 0; j < 10; j++)
-      board.insertCell(i, j);
-
   set_infection_values(board);
 
+  board.fill_board(100);
 
   std::cout << "Suscettibili   Infetti   Rimossi\n";
     
