@@ -95,17 +95,6 @@ Board evolve(Board const &board) {
     }
   }
 
-  /* Abbiamo deciso di mettere il processo di infezione device quello di
-   * movimento in for loops separati per diminuire il bias verso le cellule in
-   * alto a sinistra che vengono valutate per prima. A dir la verità il bias non
-   * si nota se il valore massimo della velocità è basso. In caso contrario
-   * però, si può notare che mediamente il numero di cellule mai infettate è più
-   * alto. La nostra ipotesi è che questo è causato in quanto esse hanno più
-   * probabilità di allontanarsi dal blocco principale di cellule quando vengono
-   * inserite inizialmente. Non abbiamo rivelato un consumo della performance
-   * significativo aggiungendo i for loops per il movimento, dunque li abbiamo
-   * inclusi */
-
   // Movimento delle cellule
 
   for (int row = 0; row < board.get_size(); row++) {
