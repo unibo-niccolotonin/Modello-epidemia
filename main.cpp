@@ -12,13 +12,23 @@
 #include <vector>
 
 void loop_of_failure(float &var, int min_value, int max_value) {
-  while (std::cin.fail() || var < min_value ||
-         var > max_value) { // verifica che il valore inserito non sia una
-                            // stringa e che non sia negativo
-    std::cout << "input non valido, inserire un valore corretto: ";
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cin >> var;
+  while (true){
+    if (std::cin.fail()){
+      std::cout << "input non valido, inserire un valore corretto: ";
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cin >> var;
+      continue;
+    } else if (var < min_value){
+      std::cout << "input troppo piccolo, inserire un valore più grande: ";
+      std::cin >> var;
+      continue;
+    } else if (var > max_value){
+      std::cout << "input troppo grande, inserire un valore più piccolo: ";
+      std::cin >> var;
+      continue;
+    }
+    break;
   }
 }
 
