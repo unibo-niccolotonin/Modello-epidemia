@@ -30,8 +30,7 @@ void infect_radius(int row, int column, Board &new_board) {
   }
 }
 
-void update_infected_cells(int row, int column,
-                           Board &new_board) {
+void update_infected_cells(int row, int column, Board &new_board) {
   infect_radius(row, column, new_board);
 
   if (new_board(row, column).clock < Board::infection_time) {
@@ -47,8 +46,7 @@ void update_infected_cells(int row, int column,
   }
 }
 
-void update_movement(int row, int column,
-                     Board &new_board) {
+void update_movement(int row, int column, Board &new_board) {
   int failure_counter = 0;
 
   while (failure_counter !=

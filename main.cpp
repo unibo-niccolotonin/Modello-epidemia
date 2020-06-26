@@ -12,18 +12,18 @@
 #include <vector>
 
 void loop_of_failure(float &var, int min_value, int max_value) {
-  while (true){
-    if (std::cin.fail()){
+  while (true) {
+    if (std::cin.fail()) {
       std::cout << "input non valido, inserire un valore corretto: ";
       std::cin.clear();
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       std::cin >> var;
       continue;
-    } else if (var < min_value){
+    } else if (var < min_value) {
       std::cout << "input troppo piccolo, inserire un valore più grande: ";
       std::cin >> var;
       continue;
-    } else if (var > max_value){
+    } else if (var > max_value) {
       std::cout << "input troppo grande, inserire un valore più piccolo: ";
       std::cin >> var;
       continue;
@@ -37,7 +37,7 @@ void set_values(Board &board) {
   float float_radius;
   float float_time;
   float n_cells;
-  
+
   std::cout << "inserimento costanti:\n";
 
   // Assegna un valore a Board::infection_radius
@@ -49,30 +49,32 @@ void set_values(Board &board) {
   // Assegna un valore a Board::infection_probability
   std::cout << "\ninserire la probabilità di infezione fra 0 e 1: ";
   std::cin >> Board::infection_probability;
-  loop_of_failure(Board::infection_probability,0 ,1);
+  loop_of_failure(Board::infection_probability, 0, 1);
 
-  //Assegna un valore a Board::infection_time
+  // Assegna un valore a Board::infection_time
   std::cout << "\ninserire il tempo di durata dell'infezione: ";
   std::cin >> float_time;
   loop_of_failure(float_time, 0, 1000000);
   Board::infection_time = static_cast<int>(float_time);
 
-  //Assegna un valore a Board::mortality_rate
+  // Assegna un valore a Board::mortality_rate
   std::cout << "\ninserire il tasso di mortalità di una cellula infetta fra "
                "0 e 1: ";
   std::cin >> Board::mortality_rate;
-  loop_of_failure(Board::mortality_rate,0 ,1);
+  loop_of_failure(Board::mortality_rate, 0, 1);
 
-  //Riempe la griglia con cellule suscettibili
+  // Riempe la griglia con cellule suscettibili
   std::cout << "\ninserire il numero di cellule suscettibili nella griglia, "
-               "almeno una e non maggiore a " << (board.get_size() * board.get_size() / 2) << ": ";
+               "almeno una e non maggiore a "
+            << (board.get_size() * board.get_size() / 2) << ": ";
   std::cin >> n_cells;
   loop_of_failure(n_cells, 1, board.get_size() * board.get_size() / 2);
   board.fill_board(static_cast<int>(n_cells), SUSCEPTIBLE);
 
   // Riempe la griglia con cellule infette
   std::cout << "\ninserire il numero di cellule infette nella griglia, non "
-               "maggiore a " << (board.get_size()) << ": ";
+               "maggiore a "
+            << (board.get_size()) << ": ";
   std::cin >> n_cells;
   loop_of_failure(n_cells, 0, board.get_size());
   board.fill_board(static_cast<int>(n_cells), INFECTED);
